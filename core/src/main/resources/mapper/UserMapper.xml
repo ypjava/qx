@@ -25,4 +25,11 @@
         FROM qx_user
     </select>
 
+    <select id="selectByUserName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT
+        <include refid="BaseColumnList" />
+        FROM qx_user
+        WHERE user_name = #{userName}
+    </select>
+
 </mapper>

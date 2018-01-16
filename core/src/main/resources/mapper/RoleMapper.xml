@@ -9,7 +9,7 @@
     </resultMap>
 
     <sql id="BaseColumnList">
-        id,`name`,create_time,update_time
+        r.id, r.`name`, r.create_time, r.update_time
     </sql>
 
     <insert id="insert" parameterType="xyz.yp.module.qx.core.domain.Role" keyProperty="id" useGeneratedKeys="true">
@@ -19,7 +19,16 @@
     <select id="selectAll" resultMap="BaseResultMap">
         SELECT
         <include refid="BaseColumnList" />
-        FROM qx_role
+        FROM qx_role r
+    </select>
+
+    <select id="selectByUserName" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseColumnList" />
+        FROM qx_role r, qx_user_role qur, qx_user u
+        WHERE r.id = qur.role_id
+        AND qur.user_id = u.id
+        AND u.user_name = #{userName}
     </select>
 
 </mapper>

@@ -71,8 +71,8 @@
     </bean>
 
     <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="xyz.yp.module.qx.core" />
-        <!--<property name="annotationClass" value="com.rongdu.cashloan.core.common.mapper.RDBatisDao" />-->
+        <property name="basePackage" value="xyz.yp.module.qx.*.mapper" />
+        <!--<property name="annotationClass" value="org.springframework.stereotype.Repository" />-->
     </bean>
     <bean id="slaveSqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
         <constructor-arg index="0" ref="sqlSessionFactory" />

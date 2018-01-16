@@ -11,7 +11,7 @@
     </resultMap>
 
     <sql id="BaseColumnList">
-        id,code,`name`,create_time,update_time,menu_id
+        p.id, p.code, p.`name`, p.create_time, p.update_time, p.menu_id
     </sql>
 
     <insert id="insert" parameterType="xyz.yp.module.qx.core.domain.Permission" keyProperty="id" useGeneratedKeys="true">
@@ -21,7 +21,17 @@
     <select id="selectAll" resultMap="BaseResultMap">
         SELECT
         <include refid="BaseColumnList" />
-        FROM qx_permission
+        FROM qx_permission p
+    </select>
+
+    <select id="selectByUserName" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseColumnList" />
+        FROM qx_permission p, qx_role_permission qrp, qx_user_role qur, qx_user u
+        WHERE p.id = qrp.permission_id
+        AND qrp.role_id = qur.role_id
+        AND qur.user_id = u.id
+        AND u.user_name = #{userName}
     </select>
 
 </mapper>
