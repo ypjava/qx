@@ -16,11 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import xyz.yp.module.qx.core.domain.User;
 import xyz.yp.module.qx.core.service.UserService;
 
-import javax.annotation.Resource;
-
 @Controller
-public class HomeController {
-    private Logger logger = LoggerFactory.getLogger(HomeController.class);
+public class UserController {
+    private Logger logger = LoggerFactory.getLogger(UserController.class);
     @Autowired
     private UserService userService;
 

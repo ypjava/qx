@@ -1,4 +1,4 @@
-package xyz.yp.module.qx.core.security;
+package xyz.yp.module.qx.console.security;
 
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -6,6 +6,8 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import xyz.yp.module.qx.core.domain.Permission;
@@ -18,8 +20,13 @@ import java.util.Set;
 
 @Component
 public class UserRealm extends AuthorizingRealm {
+    private static Logger logger = LoggerFactory.getLogger(UserRealm.class);
     @Autowired
     private UserService userService;
+
+    public UserRealm() {
+        logger.info("创建UserRealm");
+    }
 
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principal) {
         String userName = (String) principal.getPrimaryPrincipal();
