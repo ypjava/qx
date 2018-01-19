@@ -7,45 +7,17 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@SuppressWarnings({ "rawtypes", "unchecked" })
-public abstract class AppAbsActionWrapper {
+public abstract class AbstractBaseActionWrapper {
     protected String dataRoot;
     protected HttpServletRequest _req;
     protected HttpServletResponse _resp;
     protected boolean writeJson = true;
 
-
-    public AppAbsActionWrapper(HttpServletResponse _resp) {
-        this(_resp, null);
+    public AbstractBaseActionWrapper(HttpServletResponse response) {
+        this(response, null);
     }
 
-
-    public static Map getParams(HttpServletRequest request) {
-        LinkedHashMap params = new LinkedHashMap();
-        Enumeration enames = request.getParameterNames();
-
-        while (enames.hasMoreElements()) {
-            String name = (String) enames.nextElement();
-            params.put(toUnderLine(name), request.getParameter(name));
-        }
-        return params;
-    }
-
-
-    public static String toUnderLine(String str) {
-        StringBuilder sb = new StringBuilder();
-        for (char c : str.toCharArray()) {
-            if (c >= 65 && c <= 90) {
-                c += 32;
-                sb.append("_");
-            }
-            sb.append(c);
-        }
-        return sb.toString();
-    }
-
-
-    public AppAbsActionWrapper(HttpServletResponse _resp, HttpServletRequest _req) {
+    public AbstractBaseActionWrapper(HttpServletResponse response, HttpServletRequest request) {
         this._resp = _resp;
         this._req = _req;
 
@@ -79,6 +51,30 @@ public abstract class AppAbsActionWrapper {
         if (writeJson) {
             JsonUtil.writeJson(result, _resp);
         }*/
+    }
+
+    public static Map getParams(HttpServletRequest request) {
+        LinkedHashMap params = new LinkedHashMap();
+        Enumeration enames = request.getParameterNames();
+
+        while (enames.hasMoreElements()) {
+            String name = (String) enames.nextElement();
+            params.put(toUnderLine(name), request.getParameter(name));
+        }
+        return params;
+    }
+
+
+    public static String toUnderLine(String str) {
+        StringBuilder sb = new StringBuilder();
+        for (char c : str.toCharArray()) {
+            if (c >= 65 && c <= 90) {
+                c += 32;
+                sb.append("_");
+            }
+            sb.append(c);
+        }
+        return sb.toString();
     }
 
     public abstract Object doAction() ;

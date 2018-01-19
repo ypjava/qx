@@ -10,13 +10,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.rongdu.cashloan.core.common.util.StringUtil;
 
-/**
- * Created by lsk on 2016/7/29.
- */
-@SuppressWarnings({ "rawtypes", "unused" })
-public abstract class AppLoginedActionWraper extends AppAbsActionWrapper {
+public abstract class AppLoginedActionWraper extends AbstractBaseActionWrapper {
+    private static Logger logger = LoggerFactory.getLogger(AppLoginedActionWraper.class);
     public AppLoginedActionWraper(HttpServletResponse _resp, HttpServletRequest _req) {
         super(_resp, _req);
     }

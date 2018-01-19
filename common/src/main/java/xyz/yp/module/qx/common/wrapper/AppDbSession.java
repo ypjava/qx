@@ -32,7 +32,7 @@ public class AppDbSession {
 	protected DBService dbService;
 	private int liveMin = 60 * 24 * 7;
 
-	private Logger logger = LoggerFactory.getLogger(AppDbSession.class);
+	private static Logger logger = LoggerFactory.getLogger(AppDbSession.class);
 
 	@Resource
 	private EhCacheCacheManager cacheManager;
